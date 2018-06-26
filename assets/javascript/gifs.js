@@ -12,7 +12,10 @@ $(document).ready(function() {
     //Function to dynamically add buttons 
     function makeButtons() {
 
-        //Loop array
+        //Remove old buttons to avoid duplicate set
+        $("#gifButtons").empty();
+
+        //Loop array of topics
         for (i = 0; i < topics.length; i++) {
 
             //Make buttons and append
@@ -36,6 +39,7 @@ $(document).ready(function() {
         //Call makeButtons function to make buttons
         makeButtons();
 
+        //Stop code execution [if not buttons goto default]
         return false;
     });
 
