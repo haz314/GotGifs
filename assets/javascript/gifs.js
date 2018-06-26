@@ -21,13 +21,13 @@ $(document).ready(function() {
             //Make buttons and append
             var b = $("<button>");
             b.addClass("topics");
-            b.attr("topic", topics[i]);
+            b.attr("data-topic", topics[i]);
             b.text(topics[i]);
             $("#gifButtons").append(b);
         }
     }
 
-    //Listen submit button clicks
+    //Listen for submit button clicks
     $("#addGif").on("click", function() {
 
         //Grab new topic text
@@ -41,6 +41,56 @@ $(document).ready(function() {
 
         //Stop code execution [if not buttons goto default]
         return false;
+    });
+
+    //Listen for topic button clicks
+    $(document).on("click", ".topics", function() {
+
+        //Collect clicked button data
+        var clicked = $(this).data("topic");
+
+        //Create query URL
+        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + clicked + "&api_key=qcPjtIk81Q4pg5dxw3fy3Z6hxO41PlGD&limit=10";
+
+        //AJAX
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        })
+            .then(function(response) {
+
+                //Display response to console and store
+                console.log(response);
+                var results = response.data;
+
+                //Loop through results and create gifs
+                for (i = 0; i < results.length; i++) {
+
+                    //Create div to store gifs
+                    var gifDiv = $("<div>");
+                    
+                    //Store rating and rating div
+                    var rating = results[i].rating;
+                    var p = $("<p>").text("Rating: " + rating);
+
+                    //Create img tags for gifs to reside
+                    var gifImage = $("<img>");
+
+                    //Set gif attributes
+                    gifImage.addClass("gif");
+                    gifImage.attr('src' , results[i].images.fixed_height_still.url);
+                    gifImage.attr('data-still' , results[i].images.fixed_height_still.url);
+                    gifImage.attr('data-animate' , results[i].images.fixed_height.url);
+                    gifImage.attr('data-state' , "still");
+
+                    //Append image and rating to gif divs
+                    gifDiv.append(p);
+                    gifDiv.append(gifImage);
+
+                    //Display gifs 
+                    $("#gifImages").prepend(gifDiv);
+                }
+            });
     });
 
     //Call makeButtons function
