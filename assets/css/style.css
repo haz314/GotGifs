@@ -4,18 +4,20 @@ body {
   }
   
   #gifImages {
-    width: 50%;
+    width: auto;
   }
   
   .gif-box {
     float: left;
-    padding: 10px;
+    padding: 25px;
+    clear: both;
   }
   
   form {
     float: right;
     width: 40%;
     padding: 15px;
+    clear: both;
   }
 
   
