@@ -78,10 +78,12 @@ $(document).ready(function() {
 
                     //Set gif attributes
                     gifImage.addClass("gif");
-                    gifImage.attr('src' , results[i].images.fixed_height_still.url);
-                    gifImage.attr('data-still' , results[i].images.fixed_height_still.url);
-                    gifImage.attr('data-animate' , results[i].images.fixed_height.url);
-                    gifImage.attr('data-state' , "still");
+                    gifImage.attr("src" , results[i].images.fixed_height_still.url);
+
+                    //Collect and set data states
+                    gifImage.attr("data-still" , results[i].images.fixed_height_still.url);
+                    gifImage.attr("data-animate" , results[i].images.fixed_height.url);
+                    gifImage.attr("data-state" , "still");
 
                     //Append image and rating to gif divs
                     gifDiv.append(p);
@@ -91,6 +93,23 @@ $(document).ready(function() {
                     $("#gifImages").prepend(gifDiv);
                 }
             });
+    });
+
+    //Listen for gif clicks
+    $(document).on("click", ".gif", function() {
+
+        //Display click to console and store
+        console.log(this);
+        var state = $(this).attr("data-state");
+
+        //Swap states
+        if (state == "still") {
+            $(this).attr("src", $(this).data("animate"));
+            $(this).attr("data-state", "animate");
+        } else {
+            $(this).attr("src", $(this).data("still"));
+            $(this).attr("data-state", "still");
+        }
     });
 
     //Call makeButtons function
