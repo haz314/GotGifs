@@ -68,6 +68,7 @@ $(document).ready(function() {
 
                     //Create div to store gifs
                     var gifDiv = $("<div>");
+                    gifDiv.addClass("gif-box");
                     
                     //Store rating and rating div
                     var rating = results[i].rating;
