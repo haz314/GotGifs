@@ -50,7 +50,7 @@ $(document).ready(function() {
         var clicked = $(this).data("topic");
 
         //Create query URL
-        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + clicked + "&api_key=qcPjtIk81Q4pg5dxw3fy3Z6hxO41PlGD&limit=10";
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + clicked + "&api_key=qcPjtIk81Q4pg5dxw3fy3Z6hxO41PlGD&limit=10";
 
         //AJAX
         $.ajax({
